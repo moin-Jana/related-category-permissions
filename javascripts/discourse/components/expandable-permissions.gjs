@@ -2,8 +2,7 @@ import Component from "@glimmer/component";
 import Category from "discourse/models/category";
 import i18n from "discourse-common/helpers/i18n";
 import eq from "truth-helpers/helpers/eq";
-import themePrefix from "discourse/helpers/theme-prefix"; // 👈 ADD THIS
-import ExpandableItem from "../components/expandable-item"; // 👈 Renamed for cleaner template
+import ExpandableItem from "./expandable-item"; // 👈 Fixed: Use ./ since they are in the same folder
 
 export default class ExpandablePermissionsComponent extends Component {
   getSlugPath = (category) => Category.slugFor(category);
