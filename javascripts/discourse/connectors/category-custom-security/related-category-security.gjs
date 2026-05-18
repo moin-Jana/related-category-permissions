@@ -1,4 +1,4 @@
-import ExpandablePermissions from ".../components/expandable-permissions";
+import ExpandablePermissions from "../components/expandable-permissions";
 
 <template>
   <ExpandablePermissions @category={{@outletArgs.category}} />
