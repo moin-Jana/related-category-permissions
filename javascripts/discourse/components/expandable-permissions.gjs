@@ -2,21 +2,17 @@ import Component from "@glimmer/component";
 import Category from "discourse/models/category";
 import i18n from "discourse-common/helpers/i18n";
 import eq from "truth-helpers/helpers/eq";
-import ExpandableItemComponent from "../components/expandable-item";
+import ExpandableItem from "./expandable-item"; // 👈 Fixed: Use ./ since they are in the same folder
 
 export default class ExpandablePermissionsComponent extends Component {
   getSlugPath = (category) => Category.slugFor(category);
-
-  constructor() {
-    super(...arguments);
-  }
 
   <template>
     <section class="related-category-security">
       {{#if (eq @category.level 2)}}
         <div class="related-grandparent-category">
           <h4>{{i18n (themePrefix "grandparent_category")}}</h4>
-          <ExpandableItemComponent
+          <ExpandableItem
             @label={{@category.parentCategory.parentCategory.name}}
             @slugPath={{this.getSlugPath
               @category.parentCategory.parentCategory
@@ -29,7 +25,7 @@ export default class ExpandablePermissionsComponent extends Component {
       {{#if @category.level}}
         <div class="related-parent-category">
           <h4>{{i18n (themePrefix "parent_category")}}</h4>
-          <ExpandableItemComponent
+          <ExpandableItem
             @label={{@category.parentCategory.name}}
             @slugPath={{this.getSlugPath @category.parentCategory}}
             @catID={{@category.parentCategory.id}}
@@ -42,7 +38,7 @@ export default class ExpandablePermissionsComponent extends Component {
           <h4>{{i18n (themePrefix "subcategories")}}</h4>
           <div class="related-subcategory-list">
             {{#each @category.subcategories as |subcategory|}}
-              <ExpandableItemComponent
+              <ExpandableItem
                 @label={{subcategory.name}}
                 @slugPath={{this.getSlugPath subcategory}}
                 @catID={{subcategory.id}}
